@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASAI - Test Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div class="test-app">
+    <header class="test-header">
+      <h1>ASAI <span>Test Dashboard</span></h1>
+      <div class="health-bar">
+        <div class="health-item" id="h-backend"><span class="dot"></span>FastAPI :8000</div>
+        <div class="health-item" id="h-n8n"><span class="dot"></span>N8N :5678</div>
+        <div class="health-item" id="h-aivi"><span class="dot"></span>AIVI :5173</div>
+        <div class="health-item" id="h-db"><span class="dot"></span>PostgreSQL :5432</div>
+      </div>
+    </header>
+
+    <div class="test-layout">
+      <!-- Panel izquierdo: controles -->
+      <div class="panel panel-controls">
+        <div class="panel-title">1. Sesion</div>
+        <div class="control-group">
+          <button id="btn-create-session" class="btn-primary">Crear Sesion</button>
+          <button id="btn-load-sessions" class="btn-secondary">Recargar</button>
+        </div>
+        <select id="session-select" class="select-input">
+          <option value="">-- Seleccionar sesion --</option>
+        </select>
+        <div id="session-info" class="info-box hidden"></div>
+
+        <div class="panel-title" style="margin-top:20px">2. Subir Evidencia</div>
+        <div class="control-group">
+          <label class="btn-secondary file-label">
+            Seleccionar archivo
+            <input type="file" id="file-input" accept=".pdf,.docx,.doc,.xlsx,.xls,.csv,.txt" hidden />
+          </label>
+        </div>
+        <div id="file-name" class="info-text"></div>
+
+        <div class="panel-title" style="margin-top:20px">3. Consultar RAG</div>
+        <textarea id="question-input" placeholder="Escribi tu pregunta..." rows="3"></textarea>
+        <div class="control-group">
+          <button id="btn-send" class="btn-primary">Enviar a N8N</button>
+        </div>
+        <div class="control-group" style="margin-top:4px">
+          <label class="checkbox-label"><input type="checkbox" id="chk-raw" /> Ver request/response raw</label>
+        </div>
+      </div>
+
+      <!-- Panel derecho: flujo de debug -->
+      <div class="panel panel-flow">
+        <div class="panel-title">Flujo de Ejecucion</div>
+        <div id="flow-log" class="flow-log">
+          <div class="flow-empty">Esperando accion...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel inferior: resultado -->
+    <div class="panel panel-result">
+      <div class="result-tabs">
+        <button class="tab active" data-tab="respuesta">Respuesta</button>
+        <button class="tab" data-tab="fuentes">Fuentes / RAG</button>
+        <button class="tab" data-tab="raw">Raw JSON</button>
+        <button class="tab" data-tab="historial">Historial BD</button>
+      </div>
+      <div id="tab-respuesta" class="tab-content active">
+        <div id="result-answer" class="result-text">Sin resultados aun.</div>
+      </div>
+      <div id="tab-fuentes" class="tab-content">
+        <div id="result-sources" class="result-text">Sin fuentes.</div>
+      </div>
+      <div id="tab-raw" class="tab-content">
+        <pre id="result-raw" class="result-pre">{}</pre>
+      </div>
+      <div id="tab-historial" class="tab-content">
+        <div id="result-history" class="result-text">Sin historial.</div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
