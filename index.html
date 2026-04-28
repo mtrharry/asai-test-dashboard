@@ -12,6 +12,10 @@
   <div class="test-app">
     <header class="test-header">
       <h1>ASAI <span>Test Dashboard</span></h1>
+      <nav class="app-tabs">
+        <button class="app-tab active" data-view="dashboard">Dashboard</button>
+        <button class="app-tab" data-view="chat">Chat</button>
+      </nav>
       <div class="health-bar">
         <div class="health-item" id="h-backend"><span class="dot"></span>FastAPI :8000</div>
         <div class="health-item" id="h-n8n"><span class="dot"></span>N8N :5678</div>
@@ -20,6 +24,7 @@
       </div>
     </header>
 
+    <div class="view view-dashboard">
     <div class="test-layout">
       <!-- Panel izquierdo: controles -->
       <div class="panel panel-controls">
@@ -82,6 +87,54 @@
         <div id="result-history" class="result-text">Sin historial.</div>
       </div>
     </div>
+    </div><!-- /view-dashboard -->
+
+    <div class="view view-chat hidden">
+      <div class="chat-layout">
+        <aside class="chat-sidebar chat-sidebar-left">
+          <div class="chat-sidebar-header">
+            <span>Auditorias</span>
+            <button id="chat-new-session" class="chat-new-btn" title="Nueva sesion">+</button>
+          </div>
+          <div id="chat-session-list" class="chat-session-list">
+            <div class="chat-empty">Sin sesiones aun</div>
+          </div>
+        </aside>
+
+        <main class="chat-main">
+          <div class="chat-header">
+            <div class="chat-header-title" id="chat-current-title">Selecciona una sesion</div>
+            <div class="chat-header-meta" id="chat-current-meta"></div>
+          </div>
+          <div id="chat-messages" class="chat-messages">
+            <div class="chat-welcome">
+              <h2>Asistente de auditoria ASAI</h2>
+              <p>Crea o selecciona una sesion para comenzar.</p>
+            </div>
+          </div>
+          <div class="chat-input-area">
+            <textarea id="chat-input" placeholder="Escribi tu pregunta... (Enter para enviar, Shift+Enter para salto de linea)" rows="2" disabled></textarea>
+            <button id="chat-send" class="chat-send-btn" disabled>Enviar</button>
+          </div>
+        </main>
+
+        <aside class="chat-sidebar chat-sidebar-right">
+          <div class="chat-sidebar-header">
+            <span>Evidencia</span>
+          </div>
+          <label id="chat-drop-zone" class="chat-drop-zone disabled">
+            <div class="chat-drop-icon">+</div>
+            <div class="chat-drop-text">Arrastrar archivo<br/>o click para seleccionar</div>
+            <div class="chat-drop-hint">PDF, DOCX, XLSX, CSV, TXT</div>
+            <input type="file" id="chat-file-input" accept=".pdf,.docx,.doc,.xlsx,.xls,.csv,.txt" hidden />
+          </label>
+          <div class="chat-files-title">Archivos en esta sesion</div>
+          <div id="chat-files-list" class="chat-files-list">
+            <div class="chat-empty">Sin archivos</div>
+          </div>
+        </aside>
+      </div>
+    </div><!-- /view-chat -->
   </div>
   <script type="module" src="/src/main.js"></script>
 </body>

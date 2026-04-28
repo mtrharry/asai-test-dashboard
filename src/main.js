@@ -1,3 +1,5 @@
+import { initChatView } from './chat.js';
+
 const API = 'http://localhost:8000/api/v1';
 const N8N = 'http://localhost:5678/webhook';
 
@@ -410,3 +412,23 @@ setInterval(checkHealth, 15000);
 loadSessions();
 initResizers();
 initCollapsibles();
+
+// --- App tabs (Dashboard / Chat) ---
+const viewDashboard = document.querySelector('.view-dashboard');
+const viewChat = document.querySelector('.view-chat');
+document.querySelectorAll('.app-tab').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    document.querySelectorAll('.app-tab').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var v = btn.dataset.view;
+    if (v === 'dashboard') {
+      viewDashboard.classList.remove('hidden');
+      viewChat.classList.add('hidden');
+    } else {
+      viewDashboard.classList.add('hidden');
+      viewChat.classList.remove('hidden');
+    }
+  });
+});
+
+initChatView();
